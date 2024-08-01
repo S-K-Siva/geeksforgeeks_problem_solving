@@ -1,7 +1,5 @@
 #include<bits/stdc++.h>
 using namespace std;
-
-
 class Solution {
   public:
    void FirstOrSecond(vector<int>& result, vector<vector<int>>& matrix, vector<vector<int>>& visited, int row, int col, int n, int m, char Dir) {
