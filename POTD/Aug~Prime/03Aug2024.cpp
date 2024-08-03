@@ -1,3 +1,6 @@
+#include<bits/stdc++.h>
+using namespace std;
+
 class Solution {
   public:
     // Function to find if there is a celebrity in the party or not.
