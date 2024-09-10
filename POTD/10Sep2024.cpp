@@ -1,52 +1,36 @@
-#include<bits/stdc++.h>
-using namespace std;
-
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
 class Solution {
-public:
-    ListNode* insertGreatestCommonDivisors(ListNode* head) {
-        ListNode* res,*result;
-        res = new ListNode(-1);
-        result = res;
-        if(head->next){
-            int val1 = head->val;
-            int val2 = head->next->val;
-            int gcdV = __gcd(val1,val2);
-            ListNode *n1,*n2,*n3;
-            n1 = new ListNode(val1);
-            n2 = new ListNode(gcdV);
-            n3 = new ListNode(val2);
-            result->next = n1;
-            n1->next = n2;
-            n2->next = n3;
-            result = n3;
-            head = head->next;
-        }else{
-            return head;
+  public:
+    int isCircle(vector<string> &arr) {
+        unordered_map<char,vector<int>> mpp;
+        int n = arr.size();
+        vector<int> outFreq(26,0), inFreq(26,0);
+        for(int i = 0;i<n;i++){
+            mpp[arr[i][0]].push_back(i);
+            ++outFreq[arr[i][0] -'a'];
+            ++inFreq[arr[i].back() - 'a'];
         }
-
-        while(head->next){
-            int val1 = result->val;
-            int val2 = head->next->val;
-            int gcdV = __gcd(val1, val2);
-            ListNode *n2,*n3;
-            n2 = new ListNode(gcdV);
-            n3 = new ListNode(val2);
-            result->next = n2;
-            n2->next = n3;
-            result = n3;
-            head = head->next;
+        
+        for(int i = 0;i<26;i++){
+            if(outFreq[i] != inFreq[i]) return 0;
         }
-
-        return res->next;
+        
+        queue<int> que;
+        que.push(0);
+        vector<int> vis(n,0);
+        vis[0] = 1;
+        int res = 1;
+        while(!que.empty()){
+            int curr = que.front();
+            que.pop();
+            int nextChar = arr[curr].back();
+            for(auto x : mpp[nextChar]){
+                if(!vis[x]){
+                    vis[x] = 1;
+                    ++res; // counts the no of strings visited successfully!
+                    que.push(x);
+                }
+            }
+        }
+        return (res == n) ? 1 : 0;
     }
 };
