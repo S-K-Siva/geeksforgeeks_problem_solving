@@ -3,6 +3,7 @@ using namespace std;
 
 class Solution {
   public:
+    // Optimal
     // int maxLength(string& str) {
     //     int res1,res2,open,close,open1,close1;
     //     open = close = res1 = res2 = open1 = close1 =  0;
@@ -27,6 +28,8 @@ class Solution {
         
     //     return max(res1,res2);
     // }
+
+    // using space O(|Str|)
     int maxLength(string& str) {
         stack<int> ss;
         int n = str.size();
