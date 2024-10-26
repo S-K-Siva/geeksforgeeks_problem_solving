@@ -1,14 +1,14 @@
 class Solution {
   public:
     int count(struct Node* head, int key) {
-        int hs4ever = 0;
+        int done = 0;
         
         struct Node* temp;
         temp = head;
         while(temp){
-            if(temp->data == key) hs4ever++;
+            if(temp->data == key) done++;
             temp = temp->next;
         }
-        return hs4ever;
+        return done;
     }
 };
